@@ -3,24 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Shop extends Model
 {
-    use HasApiTokens, HasFactory;
+    use HasFactory;
 
     protected $fillable = [
         'name',
-        'email',
+        'address',
         'phone', 
-        'password',
-        'google_id'
+        'barber_id',
+        'current_token'
     ];
 
-    protected $hidden = [
-        'password',
-    ];
+    public function barber()
+    {
+        return $this->belongsTo(Barber::class);
+    }
 
     public function tokens()
     {

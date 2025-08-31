@@ -6,29 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Barber extends Authenticatable
 {
     use HasApiTokens, HasFactory;
 
     protected $fillable = [
         'name',
-        'email',
-        'phone', 
+        'email', 
+        'phone',
         'password',
-        'google_id'
+        'is_busy'
     ];
 
     protected $hidden = [
         'password',
     ];
 
-    public function tokens()
+    public function shop()
     {
-        return $this->hasMany(Token::class);
-    }
-
-    public function customerPreferences()
-    {
-        return $this->hasMany(CustomerPreference::class);
+        return $this->hasOne(Shop::class);
     }
 }
